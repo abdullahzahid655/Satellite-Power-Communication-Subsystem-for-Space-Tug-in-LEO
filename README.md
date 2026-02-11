@@ -1,473 +1,417 @@
 # 🛰️ H2Z Satellite Power & Communication Subsystem
-## AI-Enhanced Professional Portfolio Project
 
-<div align="center">
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)](https://streamlit.io/)
+[![MLflow](https://img.shields.io/badge/MLflow-2.8+-green.svg)](https://mlflow.org/)
+[![W&B](https://img.shields.io/badge/Weights_%26_Biases-0.16+-yellow.svg)](https://wandb.ai/)
 
-![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
-![Python](https://img.shields.io/badge/Python-3.10+-green.svg)
-![Status](https://img.shields.io/badge/Status-Active-yellow)
+## 🎯 Overview
 
-**A comprehensive satellite power and communication system simulation integrating aerospace engineering with cutting-edge AI/ML techniques**
+**H2Z Satellite Power & Communication Subsystem** is a professional-grade AI-enhanced simulation platform for Low Earth Orbit (LEO) Space Tug satellite power management. This project integrates aerospace engineering principles with cutting-edge machine learning technologies to create an autonomous, intelligent power system.
 
-</div>
+### Key Features
 
----
-
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Project Structure](#project-structure)
-- [Quick Start](#quick-start)
-- [Core Aerospace Functions](#core-aerospace-functions)
-- [AI/ML Capabilities](#aiml-capabilities)
-- [Visualization Dashboard](#visualization-dashboard)
-- [Requirements](#requirements)
-- [Usage](#usage)
-- [Output Examples](#output-examples)
-- [Documentation](#documentation)
-- [Contributing](#contributing)
-- [License](#license)
+| Feature | Description |
+|---------|-------------|
+| ⚡ **Power Budget Analysis** | Comprehensive sunlight/eclipse phase calculations |
+| 🔋 **Battery Optimization** | SAC Reinforcement Learning for lifecycle management |
+| ☀️ **MPPT Analysis** | Maximum Power Point Tracking efficiency modeling |
+| 🌡️ **Thermal Analysis** | Stefan-Boltzmann radiative heat transfer |
+| 🤖 **AI/ML Pipeline** | LSTM forecasting, optimization, and autonomous control |
 
 ---
 
-## Overview
+## 🏗️ Architecture
 
-This project demonstrates the integration of **aerospace engineering domain expertise** with **modern AI/ML techniques** for satellite power system management. Originally a Final Year Project for a Space Tug mission in Low Earth Orbit (LEO), it has been enhanced with professional-grade software engineering practices and advanced machine learning capabilities.
-
-### Mission Context
-- **Mission**: Space Tug for Active Debris Removal (ADR) in LEO
-- **Orbit**: Sun-Synchronous Orbit at 500-700 km altitude
-- **Purpose**: Validate power budgets, solar array sizing, battery management, and SDR communication for autonomous space operations
+```mermaid
+graph TB
+    subgraph "Orbital Environment"
+        ORB[Orbital Parameters]
+        SUN[Sun Position]
+        ECL[Eclipse Calculator]
+    end
+    
+    subgraph "Power System"
+        SOL[Solar Array Model]
+        MPPT[MPPT Efficiency]
+        BAT[Battery Model]
+        LOAD[Power Demands]
+    end
+    
+    subgraph "RL Environment"
+        ENV[H2Z Battery Env]
+        STATE[20D State Space]
+        ACTION[5D Action Space]
+    end
+    
+    subgraph "AI/ML Layer"
+        SAC[SAC Agent]
+        MLFLOW[MLflow Tracking]
+        WANDB[W&B Integration]
+    end
+    
+    subgraph "Visualization"
+        STREAMLIT[Streamlit Dashboard]
+        PLOTLY[Plotly Charts]
+        REPORTS[HTML Reports]
+    end
+    
+    ORB --> ENV
+    SUN --> MPPT
+    ECL --> ENV
+    SOL --> MPPT
+    MPPT --> BAT
+    BAT --> ENV
+    LOAD --> ENV
+    
+    ENV --> STATE
+    STATE --> SAC
+    ACTION --> SAC
+    
+    SAC --> MLFLOW
+    SAC --> WANDB
+    
+    MLFLOW --> STREAMLIT
+    WANDB --> STREAMLIT
+    PLOTLY --> STREAMLIT
+```
 
 ---
 
-## Key Features
+## 📊 System Specifications
 
-### 🛠️ Core Aerospace Functions
-- **Power Budget Analysis**: Comprehensive calculation of sunlight/eclipse power requirements
-- **Solar Array Sizing**: Multi-junction GaAs cell optimization with degradation modeling
-- **Battery Management**: Li-Ion sizing with depth-of-discharge considerations
-- **Thermal Analysis**: Stefan-Boltzmann radiative heat dissipation modeling
-- **MPPT Efficiency**: Maximum Power Point Tracking performance analysis
+### Orbital Parameters
+| Parameter | Value |
+|-----------|-------|
+| Altitude | 500 km |
+| Inclination | 97.4° |
+| Period | 98 minutes |
+| Beta Angle | 45° (typical) |
+| Eclipse Duration | 36.26 minutes |
+| Sunlight Duration | 61.74 minutes |
 
-### 🤖 AI/ML Capabilities
-- **Predictive Analytics**
-  - LSTM Solar Irradiance Forecaster
-  - Physics-Informed Battery Degradation Predictor
-  - Autoencoder-based Anomaly Detection
+### Power System
+| Component | Specification |
+|-----------|---------------|
+| Solar Array | 2.733 m², 30% efficiency (GaAs MJ) |
+| Peak Power | 851.61 W (BOL) |
+| Battery | 163.22 Wh Li-Ion (28V nominal) |
+| Max DOD | 80% |
+| MPPT Efficiency | 97% |
 
-- **Optimization Algorithms**
-  - Genetic Algorithm for Power Allocation
-  - Particle Swarm Optimization for MPPT
-  - Bayesian Optimization for Hyperparameter Tuning
-
-- **Autonomous Systems**
-  - PPO Reinforcement Learning Agent for Power Management
-  - Fuzzy Logic Controller for Thermal Regulation
-  - Real-time Fault Detection and Response
-
-### 📊 Visualization Dashboard
-- Interactive Plotly-based monitoring
-- Real-time power system telemetry
-- 3D orbital visualization
-- MPPT efficiency analysis
-- Anomaly detection dashboard
+### AI/ML Specifications
+| Component | Specification |
+|-----------|---------------|
+| State Space | 20 dimensions |
+| Action Space | 5 continuous dimensions |
+| Algorithm | Soft Actor-Critic (SAC) |
+| Replay Buffer | 500,000 transitions |
+| Training Steps | Up to 1,000,000 |
 
 ---
 
-## Project Structure
+## 🚀 Quick Start
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/your-repo/H2Z-Satellite.git
+cd H2Z-Satellite
+```
+
+### 2. Install Dependencies
+```bash
+# Core dependencies
+pip install -r requirements.txt
+
+# Enhanced visualization (recommended)
+pip install -r requirements_enhanced.txt
+
+# ML tracking (optional)
+pip install mlflow wandb
+```
+
+### 3. Run Main Analysis
+```bash
+# Basic power budget analysis
+cd early_project
+python src/main.py
+
+# Select option 1-4 for different analyses
+```
+
+### 4. Launch Dashboard
+```bash
+# Streamlit dashboard (recommended)
+cd early_project
+streamlit run src/visualization/streamlit_dashboard.py
+
+# Or use the original dashboard
+python src/visualization/dashboard.py
+```
+
+### 5. Train RL Agent
+```bash
+cd project_battery_life_SPU
+
+# Basic training
+python src/rl/train_battery_agent.py --total_timesteps 10000
+
+# With experiment tracking
+python src/rl/train_battery_agent.py \
+    --total_timesteps 10000 \
+    --enable_mlflow \
+    --enable_wandb
+```
+
+---
+
+## 📁 Project Structure
 
 ```
 H2Z_Satellite/
-├── src/
-│   ├── core/
-│   │   ├── power_budget.py          # Core aerospace calculations
-│   │   ├── thermal_analysis.py       # Thermal modeling
-│   │   └── mppt_analysis.py          # MPPT efficiency
-│   ├── ml_models/
-│   │   ├── predictive/
-│   │   │   ├── solar_forecaster.py   # LSTM forecasting
-│   │   │   ├── battery_predictor.py  # Degradation prediction
-│   │   │   └── anomaly_detector.py   # Autoencoder
-│   │   ├── optimization/
-│   │   │   ├── genetic_optimizer.py # GA optimization
-│   │   │   └── pso_optimizer.py     # PSO MPPT
-│   │   └── autonomous/
-│   │       └── rl_agent.py           # PPO RL agent
-│   ├── visualization/
-│   │   ├── dashboard.py              # Interactive dashboard
-│   │   └── plots.py                  # Visualization utilities
-│   ├── api/
-│   │   ├── routes.py                 # FastAPI routes
-│   │   └── schemas.py                # Pydantic schemas
-│   ├── config/
-│   │   ├── settings.py               # Configuration
-│   │   └── hyperparameters.yaml      # ML hyperparameters
-│   ├── tests/
-│   │   ├── unit/
-│   │   ├── integration/
-│   │   └── ml/
-│   └── main.py                       # Entry point
-├── data/
-│   ├── raw/                          # Raw telemetry data
-│   ├── processed/                     # Processed datasets
-│   └── models/                        # Saved ML models
-├── docs/                              # Documentation
-├── notebooks/                        # Jupyter notebooks
-├── requirements.txt                   # Python dependencies
-├── setup.py                           # Package setup
-├── Dockerfile                         # Containerization
-└── README.md                         # This file
+├── README.md                      # This file
+├── requirements.txt              # Core dependencies
+├── requirements_enhanced.txt    # Full dependencies
+│
+├── early_project/               # Power system simulation
+│   ├── src/
+│   │   ├── core/
+│   │   │   └── power_budget.py   # Core aerospace calculations
+│   │   ├── visualization/
+│   │   │   ├── dashboard.py      # Original Plotly dashboard
+│   │   │   └── streamlit_dashboard.py  # NEW: Streamlit dashboard
+│   │   └── main.py               # Entry point
+│   └── docs/
+│
+├── project_battery_life_SPU/    # RL battery optimization
+│   ├── src/
+│   │   ├── core/
+│   │   │   └── battery_degradation.py  # Physics model
+│   │   ├── rl/
+│   │   │   ├── agents/
+│   │   │   │   └── sac_agent.py   # SAC implementation
+│   │   │   ├── environments/
+│   │   │   │   └── h2z_battery_env.py  # Gymnasium env
+│   │   │   ├── baselines/
+│   │   │   │   └── rule_based.py  # Baseline strategies
+│   │   │   └── train_battery_agent.py
+│   │   └── ml_training/          # NEW: ML tracking
+│   │       ├── experiment_tracker.py   # MLflow integration
+│   │       └── wandb_config.py   # W&B integration
+│   ├── models/                   # Saved model checkpoints
+│   └── logs/                     # Training logs
+│
+└── docs/                         # Documentation
 ```
 
 ---
 
-## Quick Start
+## 🎮 Usage Examples
 
-### Prerequisites
-- Python 3.10 or higher
-- Git
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/H2Z-Satellite-Power.git
-cd H2Z-Satellite-Power
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the main application
-python src/main.py
-```
-
----
-
-## Core Aerospace Functions
-
-### Power Budget Calculation
-
+### Power System Analysis
 ```python
-from src.core.power_budget import (
-    SatelliteSystem,
-    PowerBudgetCalculator,
-    OrbitalParameters,
-    SolarArraySpecifications,
-    BatterySpecifications,
-    SubsystemPower
-)
+from early_project.src.core.power_budget import SatelliteSystem
 
-# Initialize satellite system
+# Initialize satellite
 satellite = SatelliteSystem("H2Z_LEO_Space_Tug")
 
 # Run complete analysis
 report = satellite.run_complete_analysis()
 
-# Access power budget results
-power = report['power_analysis']
-print(f"Solar Array Power: {power['array_requirements']['required_power_watts']:.2f} W")
-print(f"Battery Capacity: {power['battery_requirements']['capacity_wh']:.2f} Wh")
-print(f"Power Margin: {power['array_requirements']['power_margin_percent']:.1f}%")
+# Export results
+satellite.export_report("h2z_analysis.json")
 ```
 
-### MPPT Analysis
-
+### Battery RL Training
 ```python
-from src.core.power_budget import MPPTAnalyzer
+from project_battery_life_SPU.src.rl.environments.h2z_battery_env import H2ZBatteryLifeEnv
+from project_battery_life_SPU.src.rl.agents.sac_agent import SACAgent
 
-mppt = MPPTAnalyzer(solar_array)
-results = mppt.power_gain_analysis(years=3)
+# Create environment
+env = H2ZBatteryLifeEnv()
 
-print(f"Initial Efficiency: {results['mppt_efficiency'][0]*100:.1f}%")
-print(f"Final Efficiency (3yr): {results['mppt_efficiency'][-1]*100:.1f}%")
+# Train agent
+agent = SACAgent(state_dim=20, action_dim=5)
+agent.train(env, total_timesteps=10000)
 ```
 
-### Thermal Analysis
+### Streamlit Dashboard
+```bash
+# Launch interactive dashboard
+streamlit run early_project/src/visualization/streamlit_dashboard.py
+```
 
+### MLflow Tracking
 ```python
-from src.core.power_budget import ThermalAnalyzer
+from project_battery_life_SPU.src.ml_training.experiment_tracker import H2ZExperimentTracker
 
-thermal = ThermalAnalyzer(emissivity=0.98, radiative_area=8.0)
-results = thermal.thermal_analysis(subsystem_dissipation)
+# Initialize tracker
+tracker = H2ZExperimentTracker()
 
-print(f"Equilibrium Temperature: {results['equilibrium_temperature_c']:.1f}°C")
-print(f"Total Dissipation: {results['subsystem_dissipation_watts']:.2f} W")
+# Start run
+tracker.start_run(run_name="experiment_1")
+
+# Log metrics
+tracker.log_metrics({'reward': -24150, 'soh': 99.9})
+
+# End run
+tracker.end_run()
 ```
 
 ---
 
-## AI/ML Capabilities
+## 📈 Visualization Dashboard
 
-### Solar Irradiance Forecasting (LSTM)
+### Available Dashboards
 
-```python
-from src.ml_models.predictive.solar_forecaster import LSTMSolarForecaster, TrainingConfig
+1. **📊 Power System Monitor**
+   - Real-time solar power generation
+   - Battery SOC visualization
+   - Subsystem power allocation
+   - Thermal status monitoring
 
-# Configure model
-config = TrainingConfig(
-    sequence_length=48,
-    forecast_horizon=6,
-    epochs=100,
-    hidden_dim=64
-)
+2. **🔋 Battery Analytics**
+   - SOH degradation projection
+   - Temperature effects analysis
+   - C-rate impact visualization
 
-forecaster = LSTMSolarForecaster(config)
+3. **☀️ MPPT Analysis**
+   - Efficiency over mission lifetime
+   - Power advantage comparison
+   - Temperature dependence
 
-# Train on historical data
-forecaster.train(solar_data_dataframe)
+4. **🌍 3D Orbit View**
+   - Interactive orbital visualization
+   - Ground track projection
 
-# Generate forecast
-forecast = forecaster.predict(historical_irradiance)
-```
+5. **🤖 RL Training Dashboard**
+   - Episode rewards
+   - Training curves
+   - Baseline comparison
 
-### Anomaly Detection (Autoencoder)
-
-```python
-from src.ml_models.predictive.anomaly_detector import AnomalyDetector
-
-detector = AnomalyDetector(encoding_dim=8)
-
-# Train on normal operation data
-detector.train(normal_power_data)
-
-# Detect anomalies
-anomalies, errors = detector.detect(new_power_data)
-```
-
-### Genetic Algorithm Optimization
-
-```python
-from src.ml_models.optimization.genetic_optimizer import GeneticAlgorithmOptimizer
-
-def objective_function(solution):
-    # Your optimization objective
-    return -solution[0]**2 - solution[1]**2
-
-ga = GeneticAlgorithmOptimizer(
-    population_size=100,
-    generations=200
-)
-
-best_solution, best_fitness, history = ga.optimize(
-    objective_function,
-    bounds=[(-10, 10), (-10, 10)],
-    maximize=True
-)
-```
-
-### PPO Reinforcement Learning Agent
-
-```python
-from src.ml_models.autonomous.rl_agent import PPOAgent, RLConfig
-
-config = RLConfig(
-    learning_rate=3e-4,
-    gamma=0.99,
-    clip_epsilon=0.2,
-    num_training_steps=50000
-)
-
-agent = PPOTrainingAgent(config)
-
-# Train the agent
-history = agent.train(num_episodes=1000)
-
-# Evaluate
-metrics = agent.evaluate(num_episodes=10)
-print(f"Mean Reward: {metrics['mean_reward']:.2f}")
+### Launch Dashboard
+```bash
+streamlit run early_project/src/visualization/streamlit_dashboard.py
 ```
 
 ---
 
-## Visualization Dashboard
+## 🔬 ML Experiment Tracking
 
-### Run Interactive Dashboard
+### MLflow
 
 ```bash
-# Generate sample visualizations
-python -c "
-from src.visualization.dashboard import PowerSystemDashboard
-dashboard = PowerSystemDashboard()
-# ... populate with data ...
-fig = dashboard.create_power_monitor()
-fig.write_html('power_dashboard.html')
-"
+# Start MLflow UI
+mlflow ui --port 5000
+
+# View experiments at http://localhost:5000
 ```
 
-### Dashboard Components
+### Weights & Biases
 
-| Component | Description |
-|-----------|-------------|
-| Solar Power Monitor | Real-time solar generation visualization |
-| Battery SOC Gauge | State of charge with color-coded indicators |
-| Power Demand Trends | Historical consumption patterns |
-| Subsystem Distribution | Pie chart of power allocation |
-| Thermal Profile | Temperature over time |
-| Eclipse Phase Tracker | Day/night cycle visualization |
+```bash
+# Login to W&B
+wandb login
 
----
-
-## Requirements
-
-### Core Dependencies
-
-```
-numpy>=1.24.0
-pandas>=2.0.0
-scipy>=1.10.0
-matplotlib>=3.7.0
-plotly>=5.15.0
-```
-
-### AI/ML Dependencies
-
-```
-torch>=2.0.0
-tensorflow>=2.13.0
-scikit-learn>=1.3.0
-xgboost>=1.7.0
-gymnasium>=0.28.0
-stable-baselines3>=2.0.0
-optuna>=3.3.0
-```
-
-### Development Dependencies
-
-```
-pytest>=7.4.0
-black>=23.0.0
-mypy>=1.4.0
-pre-commit>=3.3.0
-sphinx>=7.0.0
-```
-
-See [requirements.txt](requirements.txt) for complete dependency list.
-
----
-
-## Usage
-
-### Basic Analysis
-
-```python
-# Run comprehensive analysis
-python src/main.py
-
-# Select option 1 for power budget analysis
-# Select option 4 for complete demonstration
-```
-
-### Generate Reports
-
-```python
-from src.core.power_budget import SatelliteSystem
-
-satellite = SatelliteSystem("My_Satellite")
-satellite.export_report("my_analysis_report.json")
-```
-
-### Create Visualizations
-
-```python
-from src.visualization.dashboard import PowerSystemDashboard
-
-dashboard = PowerSystemDashboard()
-# ... populate data ...
-fig = dashboard.create_power_monitor()
-fig.write_html("dashboard.html")
+# Initialize in project
+wandb init
 ```
 
 ---
 
-## Output Examples
+## 📊 Performance Metrics
 
-### Power Budget Summary
+| Metric | Value | Description |
+|--------|-------|-------------|
+| MPPT Efficiency | 97% | Peak tracking efficiency |
+| Battery SOH | 99.9% | After 1 year RL training |
+| Power Margin | 18.5% | Available power buffer |
+| Thermal Range | -90°C to +70°C | Operating temperature |
 
-```
-============================================================
-POWER BUDGET SUMMARY
-============================================================
+### Baseline Comparison
 
-☀️ Solar Array Requirements:
-   • Required Power: 851.61 W
-   • Required Area: 2.733 m²
-   • Required Area (EOL): 2.92 m²
-   • Power Margin: 21.8%
-
-🔋 Battery Requirements:
-   • Capacity: 163.22 Wh (5.83 Ah)
-   • Mass: 2.04 kg
-   • Max Discharge: 178.93 W
-
-🌡️ Thermal Analysis:
-   • Equilibrium Temperature: 63.0 °C
-   • Total Dissipation: 191.89 W
-   • Thermal Margin: 237.0 K
-```
-
-### MPPT Efficiency Analysis
-
-```
-MPPT EFFICIENCY ANALYSIS (3 Years)
-
-Initial MPPT Efficiency: 97.0%
-Final MPPT Efficiency (3 years): 94.0%
-
-Initial Power Advantage: 12.0%
-Final Power Advantage (3 years): 10.5%
-
-Annual Energy Savings: ~2,920 kWh
-Total 3-Year Savings: ~8,760 kWh
-```
+| Strategy | Mean Reward | Final SOH | Violations |
+|----------|-------------|-----------|------------|
+| **SAC RL Agent** | **-24,151** | **100%** | **0** |
+| Simple Rule-Based | -538,463 | 100% | 0 |
+| Constant Current | -582,048 | 100% | 0 |
+| Temperature Aware | -546,175 | 100% | 0 |
 
 ---
 
-## Documentation
+## 🛠️ Technology Stack
 
-Comprehensive documentation is available in the `docs/` directory:
+### Core
+- **Python 3.10+** - Programming language
+- **NumPy/SciPy** - Scientific computing
+- **Pandas** - Data manipulation
 
-- [API Documentation](docs/api.md) - Complete API reference
-- [ML Models Guide](docs/ml_models.md) - AI/ML model documentation
-- [User Guide](docs/user_guide.md) - Getting started guide
-- [Examples](docs/examples/) - Usage examples
+### Machine Learning
+- **PyTorch** - Deep learning framework
+- **Gymnasium** - RL environment interface
+- **Stable-Baselines3** - RL algorithms
+
+### Visualization
+- **Streamlit** - Web application framework
+- **Plotly** - Interactive charts
+- **Altair** - Statistical visualization
+
+### Experiment Tracking
+- **MLflow** - ML lifecycle management
+- **Weights & Biases** - Training visualization
 
 ---
 
-## Contributing
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [API Documentation](docs/api.md) | Complete API reference |
+| [ML Models Guide](docs/ml_models.md) | ML model details |
+| [User Guide](docs/user_guide.md) | Getting started guide |
+| [Architecture](docs/architecture.md) | System architecture |
+
+---
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open Pull Request
 
 ---
 
-## License
+## 📄 License
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - **Air University Islamabad** - Academic institution
-- **Project Supervisors** - Prof. Dr. Ali Sarosh, Prof. Dr. Akram Rashid
-- **Open Source Community** - For the amazing tools and libraries
+- **OpenAI** - RL research
+- **MLflow Team** - Experiment tracking
+- **Weights & Biases** - Training visualization
+
+---
+
+## 📞 Contact
+
+**Project Maintainers** - [Your Contact Information]
+
+**Project Link**: [https://github.com/your-repo/H2Z-Satellite](https://github.com/your-repo/H2Z-Satellite)
 
 ---
 
 <div align="center">
 
-**Built with ❤️ for the future of space exploration**
+### 🛰️ Built with ❤️ for Space Exploration
 
-*This project demonstrates professional software engineering practices combined with aerospace domain expertise and modern AI/ML techniques.*
+**Star this repository** if you find it helpful!
 
 </div>
 
