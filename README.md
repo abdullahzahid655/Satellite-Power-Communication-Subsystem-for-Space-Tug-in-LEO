@@ -401,7 +401,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 📞 Contact
 
-**Project Maintainers** - [Your Contact Information]
+**Project Maintainers** - abdullahzahid6555@gmail.com
 
 **Project Link**: [https://github.com/your-repo/H2Z-Satellite](https://github.com/your-repo/H2Z-Satellite)
 
